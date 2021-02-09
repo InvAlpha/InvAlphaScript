@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace invalpha
 {
@@ -15,6 +16,7 @@ namespace invalpha
             TOKEN_SEP_RBRACK, // ]
             TOKEN_SEP_LCURLY, // {
             TOKEN_SEP_RCURLY, // }
+            TOKEN_SEP_COMMA, // ,
             TOKEN_SEP_S_QUOTATION, // '
             TOKEN_OP_WAVE, // ~
             TOKEN_OP_ASSIGN, // =
@@ -49,7 +51,7 @@ namespace invalpha
         {
             IASTokenType type = IASTokenType::TOKEN_UNDEFINED;
             IASuint32 line = 0;
-            IASuint32 literal_index = 0;
+            std::string data;
         };
     }
 }

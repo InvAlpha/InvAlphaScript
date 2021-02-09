@@ -1,5 +1,10 @@
 #include "IASVirtualMachine.h"
 
+invalpha::script::IASVirtualMachine::~IASVirtualMachine()
+{
+    releaseResources();
+}
+
 void invalpha::script::IASVirtualMachine::init()
 {
     ins_action_table.push_back(ins_action::ins_add);

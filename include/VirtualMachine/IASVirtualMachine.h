@@ -16,6 +16,7 @@ namespace invalpha
         class IASVirtualMachine
         {
         public:
+            ~IASVirtualMachine();
             void init();
             void loadByteCodes(const std::string& bytecode_path);
             void getInstructionOpCode(const IASuint32& instruction);

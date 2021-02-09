@@ -3,15 +3,15 @@
 
 #include <iostream>
 
-struct A
-{
-    std::string x;
-};
-
 int main(int argc, char* argv[])
 {
     using namespace invalpha::script;
     IASVirtualMachine vm;
     vm.init();
+    IASLexer lexer;
+    lexer.init();
+    lexer.loadSource("helloworld.ias");
+    lexer.dbg_analyzeAll();
+    std::cin.get();
     return 0;
 }

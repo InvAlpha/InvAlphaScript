@@ -29,18 +29,20 @@ namespace invalpha
             bool isNewLine(const IASint8& ch);
             bool isDigit(const IASint8& ch);
             bool isLetter(const IASint8& ch);
+            bool isNumber(const IASint8& ch);
             bool test(const std::string& prefix);
             void nextString();
             void nextNumber();
             void nextIdentifier();
             void nextToken();
+
+            void dbg_analyzeAll();
         private:
             IASuint32 read_index = 0;
             IASToken next_token;
             std::string source;
-            IASuint32 line = 0;
+            IASuint32 line = 1;
             std::unordered_map<std::string, IASTokenType> keymap;
-            std::vector<std::string> literals;
         };
     }
 }

@@ -2,6 +2,7 @@ with system
 
 create main~
 '
+ system.out.println("sddds");
  print~"Hello World"
  return 0
 '
