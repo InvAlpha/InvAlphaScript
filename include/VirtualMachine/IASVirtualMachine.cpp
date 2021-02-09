@@ -18,10 +18,12 @@ void invalpha::script::IASVirtualMachine::init()
     ins_action_table.push_back(ins_action::ins_jmp);
     ins_action_table.push_back(ins_action::ins_jmpz);
     ins_action_table.push_back(ins_action::ins_exit);
+    ins_action_table.push_back(ins_action::ins_end);
     ins_action_table.push_back(ins_action::ins_eq);
     ins_action_table.push_back(ins_action::ins_le);
     ins_action_table.push_back(ins_action::ins_lt);
     ins_action_table.push_back(ins_action::ins_load);
+    ins_action_table.push_back(ins_action::ins_mov);
 }
 
 void invalpha::script::IASVirtualMachine::loadByteCodes(const std::string& bytecode_path)
@@ -154,7 +156,13 @@ void invalpha::script::ins_action::ins_mul(IASVirtualMachine* vm_ptr, const IASu
 void invalpha::script::ins_action::ins_call(IASVirtualMachine* vm_ptr, const IASuint32& instruction)
 {
     aux_getInsParm(instruction);
-    //vm_ptr->closure_stack.pushClosure();
+    vm_ptr->closure_stack.pushClosure(vm_ptr->prototypes[global::parm_buffer]);
+    for (IASuint32 i = 0; i < vm_ptr->closure_stack.top()->parm_num; i++)
+    {
+        vm_ptr->closure_stack.top()->loadParm(vm_ptr->parm_stack.top());
+        vm_ptr->parm_stack.pop();
+    }
+
 }
 
 void invalpha::script::ins_action::ins_pushparm(IASVirtualMachine* vm_ptr, const IASuint32& instruction)
@@ -233,4 +241,12 @@ void invalpha::script::ins_action::ins_alloc(IASVirtualMachine* vm_ptr, const IA
     aux_getInsParmB(instruction);
     global::parm_bufferA = vm_ptr->allocVariable((IASVariableType)global::parm_bufferB); // resource saving
     vm_ptr->closure_stack.top()->allocVariable((IASVariableType)global::parm_bufferB, global::parm_bufferA);
+}
+
+void invalpha::script::ins_action::ins_end(IASVirtualMachine* vm_ptr, const IASuint32& instruction)
+{
+    auto closure_ptr = vm_ptr->closure_stack.top();
+    if (closure_ptr->has_return_val)
+        vm_ptr->parm_stack.push(closure_ptr->func_memory[closure_ptr->variable_write_index - 1]);
+    vm_ptr->closure_stack.pop();
 }

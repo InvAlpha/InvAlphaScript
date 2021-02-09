@@ -21,3 +21,7 @@ void invalpha::script::IASClosure::allocVariable(const IASVariableType& type, co
         ++variable_write_index;
     }
 }
+
+void invalpha::script::IASClosure::loadParm(IASVariable& variable)
+{
+}

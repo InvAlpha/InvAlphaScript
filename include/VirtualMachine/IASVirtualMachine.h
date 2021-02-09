@@ -7,6 +7,7 @@
 
 #include "../IASDataType.h"
 #include "IASClosureStack.h"
+#include "IASPrototype.h"
 #include "../IASExitCode.h"
 #include "IASVariable.h"
 #include "IASRegister.h"
@@ -33,6 +34,7 @@ namespace invalpha
             std::vector<std::string> mem_string;
             std::vector<double> mem_real;
             std::stack<IASVariable> parm_stack;
+            std::vector<IASPrototype> prototypes;
         private:
             IASuint32 opcode_buffer = 0;
             std::vector<std::function<void(IASVirtualMachine*, const IASint32&)>> ins_action_table;
@@ -71,6 +73,7 @@ namespace invalpha
             void ins_load(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_mov(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_alloc(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
+            void ins_end(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
         }
     }
 }

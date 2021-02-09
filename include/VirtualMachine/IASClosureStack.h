@@ -13,7 +13,6 @@ namespace invalpha
         class IASClosureStack
         {
         public:
-            // warning: the closure shouldn't be reused directly as it's managed by this Closure Stack
             void pushClosure(const IASPrototype& proto);
             // assume that we don't use pop() when the stack is empty
             void pop();

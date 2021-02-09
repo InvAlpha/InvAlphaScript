@@ -10,8 +10,9 @@ int main(int argc, char* argv[])
     vm.init();
     IASLexer lexer;
     lexer.init();
-    lexer.loadSource("helloworld.ias");
-    lexer.dbg_analyzeAll();
+    //lexer.loadSource("helloworld.ias");
+    //lexer.dbg_analyzeAll();
+
     std::cin.get();
     return 0;
 }

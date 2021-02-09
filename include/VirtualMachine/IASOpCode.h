@@ -22,6 +22,7 @@ namespace invalpha
             OP_JMP,
             OP_JMPZ,
             OP_EXIT,
+            OP_END,
 
             // logic
             OP_EQ,
