@@ -3,10 +3,13 @@
 #include <string>
 #include <functional>
 #include <fstream>
+#include <stack>
 
 #include "../IASDataType.h"
 #include "IASClosureStack.h"
 #include "../IASExitCode.h"
+#include "IASVariable.h"
+#include "IASRegister.h"
 
 namespace invalpha
 {
@@ -21,18 +24,18 @@ namespace invalpha
             void loadByteCodes(const std::string& bytecode_path);
             void getInstructionOpCode(const IASuint32& instruction);
             void executeInstuction(const IASuint32& instruction);
+            IASuint32 allocVariable(const IASVariableType& type);
             void releaseResources();
 
             // they are exposed for more elegant codes(or you need to set tons of friends:)
             IASuint32 pc = 0;
             IASClosureStack closure_stack;
-        private:
-            IASuint32 opcode_buffer = 0;
-
             std::vector<std::string> mem_string;
             std::vector<double> mem_real;
+            std::stack<IASVariable> parm_stack;
+        private:
+            IASuint32 opcode_buffer = 0;
             std::vector<std::function<void(IASVirtualMachine*, const IASint32&)>> ins_action_table;
-
             std::vector<IASuint32> bytecodes;
         };
 
@@ -58,7 +61,6 @@ namespace invalpha
             void ins_intdiv(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_mul(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_call(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
-            void ins_pushparmf(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_pushparm(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_pop(IASVirtualMachine* vm_ptr, const IASuint32& instruction);
             void ins_jmp(IASVirtualMachine* vm_ptr, const IASuint32& instruction);

@@ -14,8 +14,8 @@ namespace invalpha
 
         struct IASVariable
         {
-            IASuint32 data_pos;
-            IASVariableType v_type;
+            IASuint32 data_pos = 0;
+            IASVariableType v_type = IASVariableType::INTEGER;
         };
     }
 }

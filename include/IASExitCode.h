@@ -7,7 +7,8 @@ namespace invalpha
         enum class IASExitCode :unsigned char
         {
             INSTRUCTION_EXIT,
-            UNDEFINED_INSTRUCTION
+            UNDEFINED_INSTRUCTION,
+            INSTRUCTION_NUMERICS_NEEDED
         };
     }
 }

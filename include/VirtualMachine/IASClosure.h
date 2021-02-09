@@ -8,15 +8,15 @@ namespace invalpha
 {
     namespace script
     {
-        class IASClosure
+        struct IASClosure
         {
-        public:
             explicit IASClosure(const IASPrototype& proto);
-        private:
+            void allocVariable(const IASVariableType& type, const IASuint32& data_pos);
+            std::vector<IASVariable> func_memory;
             IASuint32 pc = 0;
             bool is_cpp_function = false;
             IASuint32 register_max_index = 0;
-            std::vector<IASVariable> func_mem;
+            IASuint32 variable_write_index = 0;
         };
     }
 }

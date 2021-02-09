@@ -15,7 +15,6 @@ namespace invalpha
             
             // for functions
             OP_CALL,
-            OP_PUSHPARMF,
             OP_PUSHPARM,
             OP_POP,
 
