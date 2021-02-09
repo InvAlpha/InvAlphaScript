@@ -1,0 +1,7 @@
+with system
+
+create main~
+'
+ print~"Hello World"
+ return 0
+'
